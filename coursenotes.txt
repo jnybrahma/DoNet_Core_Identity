@@ -1,0 +1,392 @@
+----------------------------------------- ASP.NET Core Identity : Authentication & Authorization ---------------------------------
+
+http://github.com/frank-liu-toronto/WebApp_Security_DotNet8
+
+%---------------------------------------- Section 1: Web Security Under the Hood for Web Application -----------------------------%
+
+## Overview
+
+## Authentication & Authorization
+
+## ASP.NET CORE Basics
+
+## Security Context in ASP.NET Core
+
+To access the source code. Please go to this github link: http://github.com/frank-liu-toronto/WebApp_Security_DotNet8
+
+Or download the entire source code here.
+
+When you use github, you can access almost each lesson's code by looking at each change in the repository's history.
+
+
+https://localhost:7072/account/login
+
+## Read Cookie with Authentication Middleware :
+
+
+## Authorization Architecture & Flow :
+
+
+## Policy Based Authorization;
+
+https://localhost:7072/humanresource
+
+https://localhost:7072/hrmanager
+
+
+## Custom Policy Based Authorization
+
+## Cookie lifetime and browser session
+
+## To create interface from class :--> click on class --> ctrl + . --> extract interface --> It will create new file I interface file 
+
+
+
+%---------------------------------------- Section 2: Secure Web APIs -------------------------------------------------------------%
+
+## Cookie Vs Token and Use Case
+
+## Create & Consume a Web API Endpoint;
+
+## Add and Create new project under same solution "WebApp_Security"
+
+## Under Solution --> Configure Startup project --> Startup Project --> Multiple startup projects: --> WEB API (Start), WebApp_Security (Start) 
+
+## Add Manage NuGet Package --> WebApp_Security --> Dependencies --> http extension --> Microsoft.AspNetCore.Http.Extensions 
+
+
+## JWT (JSON Web Token )Token
+
+## JWT Token summary -- >[Hashing algorithm][Claims][Hashed Claims]
+
+##  JWT token flow
+
+[Browser] --> [WebApp] <------token----- > [Authentication Provider]
+
+## Installed new NuGet Package for JWT in Web API project
+
+- search for JWT --> System.IdentityModel.Tokens.Jwt, Microsoft.AspNetCore.Authentication.JwtBearer
+
+- Install - Microsoft.AspNetCore.Authentication.JwtBearer
+
+https://localhost:7130/WeatherForecast
+
+
+
+%---------------------------------------- Section 3: ASP.NET Core Identity--------------------------------------------------------%
+
+## Installed new NuGet Package 
+
+## Create new web app (ASP.NET Core Web App) project in WebApp_Security Solution : - Web App
+
+## Install NuGet Package in -- project -- Web App 
+--> Identity.EntityFrameworkCore (Microsoft.AspNetCore.Identity), (Microsoft.AspNetCore.Identity.EntityFrameworkCore)
+--> EntityFrameworkCore.SqlServer (Microsoft.EntityFrameworkCore.SqlServer)
+--> EntityFrameworkCore.Design (Microsoft.EntityFrameworkCore.Design)
+--> EntityFrameworkCore.Tools (Microsoft.EntityFrameworkCore.Tools)
+
+## UI (Not Using) 
+--> Identity UI
+
+%------------- appsetting.json --------------%
+
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "ConnectionStrings": {
+    "Default": "Data Source=(local);Initial Catalog=AppUsers; Integrated Security=True;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False"
+  },
+  "AllowedHosts": "*"
+}
+
+%---------------------------------------------------------------------------%
+
+Data Source=(local);Initial Catalog=AppUsers; Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False
+
+(base) PM> Update-Database -Context AccountContext
+
+
+##To Run the  migration in  NuGet package Console: Set the deafult project to WebApp
+
+
+PM> Add-Migration Init
+
+Multiple startup projects set.
+Using project 'WebApp' as the startup project.
+Build started...
+Build succeeded.
+To undo this action, use Remove-Migration.
+
+(base) PM> Update-Database
+
+(base) PM> Update-Database
+
+Multiple startup projects set.
+Using project 'WebApp' as the startup project.
+Build started...
+Build succeeded.
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (805ms) [Parameters=[], CommandType='Text', CommandTimeout='60']
+      CREATE DATABASE [AppUsers];
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (508ms) [Parameters=[], CommandType='Text', CommandTimeout='60']
+      IF SERVERPROPERTY('EngineEdition') <> 5
+      BEGIN
+          ALTER DATABASE [AppUsers] SET READ_COMMITTED_SNAPSHOT ON;
+      END;
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (98ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (18ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE [__EFMigrationsHistory] (
+          [MigrationId] nvarchar(150) NOT NULL,
+          [ProductVersion] nvarchar(32) NOT NULL,
+          CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+      );
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (30ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (24ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT [MigrationId], [ProductVersion]
+      FROM [__EFMigrationsHistory]
+      ORDER BY [MigrationId];
+Microsoft.EntityFrameworkCore.Migrations[20402]
+      Applying migration '20240428052126_Init'.
+Applying migration '20240428052126_Init'.
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (8ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE [AspNetRoles] (
+          [Id] nvarchar(450) NOT NULL,
+          [Name] nvarchar(256) NULL,
+          [NormalizedName] nvarchar(256) NULL,
+          [ConcurrencyStamp] nvarchar(max) NULL,
+          CONSTRAINT [PK_AspNetRoles] PRIMARY KEY ([Id])
+      );
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (4ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE [AspNetUsers] (
+          [Id] nvarchar(450) NOT NULL,
+          [UserName] nvarchar(256) NULL,
+          [NormalizedUserName] nvarchar(256) NULL,
+          [Email] nvarchar(256) NULL,
+          [NormalizedEmail] nvarchar(256) NULL,
+          [EmailConfirmed] bit NOT NULL,
+          [PasswordHash] nvarchar(max) NULL,
+          [SecurityStamp] nvarchar(max) NULL,
+          [ConcurrencyStamp] nvarchar(max) NULL,
+          [PhoneNumber] nvarchar(max) NULL,
+          [PhoneNumberConfirmed] bit NOT NULL,
+          [TwoFactorEnabled] bit NOT NULL,
+          [LockoutEnd] datetimeoffset NULL,
+          [LockoutEnabled] bit NOT NULL,
+          [AccessFailedCount] int NOT NULL,
+          CONSTRAINT [PK_AspNetUsers] PRIMARY KEY ([Id])
+      );
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (7ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE [AspNetRoleClaims] (
+          [Id] int NOT NULL IDENTITY,
+          [RoleId] nvarchar(450) NOT NULL,
+          [ClaimType] nvarchar(max) NULL,
+          [ClaimValue] nvarchar(max) NULL,
+          CONSTRAINT [PK_AspNetRoleClaims] PRIMARY KEY ([Id]),
+          CONSTRAINT [FK_AspNetRoleClaims_AspNetRoles_RoleId] FOREIGN KEY ([RoleId]) REFERENCES [AspNetRoles] ([Id]) ON DELETE CASCADE
+      );
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (7ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE [AspNetUserClaims] (
+          [Id] int NOT NULL IDENTITY,
+          [UserId] nvarchar(450) NOT NULL,
+          [ClaimType] nvarchar(max) NULL,
+          [ClaimValue] nvarchar(max) NULL,
+          CONSTRAINT [PK_AspNetUserClaims] PRIMARY KEY ([Id]),
+          CONSTRAINT [FK_AspNetUserClaims_AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [AspNetUsers] ([Id]) ON DELETE CASCADE
+      );
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (11ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE [AspNetUserLogins] (
+          [LoginProvider] nvarchar(450) NOT NULL,
+          [ProviderKey] nvarchar(450) NOT NULL,
+          [ProviderDisplayName] nvarchar(max) NULL,
+          [UserId] nvarchar(450) NOT NULL,
+          CONSTRAINT [PK_AspNetUserLogins] PRIMARY KEY ([LoginProvider], [ProviderKey]),
+          CONSTRAINT [FK_AspNetUserLogins_AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [AspNetUsers] ([Id]) ON DELETE CASCADE
+      );
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (7ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE [AspNetUserRoles] (
+          [UserId] nvarchar(450) NOT NULL,
+          [RoleId] nvarchar(450) NOT NULL,
+          CONSTRAINT [PK_AspNetUserRoles] PRIMARY KEY ([UserId], [RoleId]),
+          CONSTRAINT [FK_AspNetUserRoles_AspNetRoles_RoleId] FOREIGN KEY ([RoleId]) REFERENCES [AspNetRoles] ([Id]) ON DELETE CASCADE,
+          CONSTRAINT [FK_AspNetUserRoles_AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [AspNetUsers] ([Id]) ON DELETE CASCADE
+      );
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (7ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE [AspNetUserTokens] (
+          [UserId] nvarchar(450) NOT NULL,
+          [LoginProvider] nvarchar(450) NOT NULL,
+          [Name] nvarchar(450) NOT NULL,
+          [Value] nvarchar(max) NULL,
+          CONSTRAINT [PK_AspNetUserTokens] PRIMARY KEY ([UserId], [LoginProvider], [Name]),
+          CONSTRAINT [FK_AspNetUserTokens_AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [AspNetUsers] ([Id]) ON DELETE CASCADE
+      );
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (7ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE INDEX [IX_AspNetRoleClaims_RoleId] ON [AspNetRoleClaims] ([RoleId]);
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (7ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE UNIQUE INDEX [RoleNameIndex] ON [AspNetRoles] ([NormalizedName]) WHERE [NormalizedName] IS NOT NULL;
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (7ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE INDEX [IX_AspNetUserClaims_UserId] ON [AspNetUserClaims] ([UserId]);
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (4ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE INDEX [IX_AspNetUserLogins_UserId] ON [AspNetUserLogins] ([UserId]);
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (5ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE INDEX [IX_AspNetUserRoles_RoleId] ON [AspNetUserRoles] ([RoleId]);
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (4ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE INDEX [EmailIndex] ON [AspNetUsers] ([NormalizedEmail]);
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (4ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE UNIQUE INDEX [UserNameIndex] ON [AspNetUsers] ([NormalizedUserName]) WHERE [NormalizedUserName] IS NOT NULL;
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (25ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+      VALUES (N'20240428052126_Init', N'8.0.4');
+	  
+----------------------------------------------------------------------------------------------
+
+https://localhost:7008/account/register
+
+smtp.gmail.com
+
+aer64mfoii7879umabr
+
+https://app.brevo.com/settings/keys/smtp
+
+smtp-relay.brevo.com
+
+SMTP Server - smtp-relay.brevo.com
+Port-         587
+Login: jnybratyer34@gmail.com
+
+
+# Add new Column to Identity User column database in sql
+
+(base) PM>  Add-Migration AddDepartmentAndPositionColumn
+
+(base) PM> Update-Database
+
+Build started...
+Build succeeded.
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (21ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (20ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (15ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT [MigrationId], [ProductVersion]
+      FROM [__EFMigrationsHistory]
+      ORDER BY [MigrationId];
+Microsoft.EntityFrameworkCore.Migrations[20402]
+      Applying migration '20240501084500_AddDepartmentAndPositionColumn'.
+Applying migration '20240501084500_AddDepartmentAndPositionColumn'.
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (56ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      ALTER TABLE [AspNetUsers] ADD [Department] nvarchar(max) NOT NULL DEFAULT N'';
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (5ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      ALTER TABLE [AspNetUsers] ADD [Position] nvarchar(max) NOT NULL DEFAULT N'';
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (4ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+      VALUES (N'20240501084500_AddDepartmentAndPositionColumn', N'8.0.4');
+Done.
+
+-------------------------------------------------------------------------------------------
+
+## Roles Vs Claims
+
+## User Profile Page
+
+https://localhost:7008/account/userprofile
+
+
+
+%---------------------------------------- Section 4: ASP.NET Core Identity MFA ---------------------------------------------------%
+
+## Multi Factor Authentication 
+
+## Two MFA - Through email
+
+- update AspNetUsers set TwoFactorEnabled = 1 WHERE id= '44ebfcf7-71ee-446a-b282-eb1c508328b0'
+
+
+## 2FA Authentication App
+
+## Before this the 2FA Authentication APP , disable the 2Factor Authentication by updating in database as below;
+
+- update AspNetUsers set TwoFactorEnabled = 0 WHERE id= '44ebfcf7-71ee-446a-b282-eb1c508328b0'
+
+
+https://localhost:7008/account/AuthenticatorWithMFASetup
+
+# Use QR Code Authentication MFA :
+
+>> Install Nuget Package --> QRCoder by Raffael Hermann
+
+## Buidl and run app
+- Login with username and password and follow the link below 
+
+https://localhost:7008/account/AuthenticatorWithMFASetup
+
+%---------------------------------------- Section 5:External Authentication Providers  -----------------------------%
+
+## Login with Social Media Account  (QAuth)
+
+
+## App in facebook.
+
+
+App ID: 3742546742395959
+Secret: 57669096nssb23523289nsw46452vdd13
+
+https://localhost:7008/signin-facebook
+
+
+## Right click -- WepApp--> Manager User Secret and add above details in secrets.json;
+
+## Add Nuget Package --> 
+>>Microsoft.AspNetCore.Authentication.Facebook
+
+
+## Under WebApp -- Project create new folder --> Controllers --> Add Controller (API Controller)
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,1 @@
+DELETE FROM [AppUsers].[dbo].[AspNetUsers] WHERE [Id]='513bfa5f-9cb4-413b-a8a1-4cda7382a4fd';

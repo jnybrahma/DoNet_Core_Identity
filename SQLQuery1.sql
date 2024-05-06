@@ -1,0 +1,1 @@
+update AspNetUsers set TwoFactorEnabled = 0 WHERE id= '44ebfcf7-71ee-446a-b282-eb1c508328b0'
